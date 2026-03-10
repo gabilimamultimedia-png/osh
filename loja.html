@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja | Papelaria para Mentes Inquietas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --white: #ffffff;
+            --bege-light: #F9F7F2;
+            --purple-soft: #D1C4E9;
+            --purple-dark: #9575CD;
+            --header-bg: #1d1d1f;
+            --text-dark: #1d1d1f;
+            --text-gray: #86868b;
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--white); color: var(--text-dark); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* HEADER (Igual à Home para consistência) */
+        header { padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 1000; background: var(--header-bg); }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo img { height: 35px; }
+        .nav-links a { text-decoration: none; color: var(--white); margin: 0 15px; font-size: 13px; font-weight: 500; text-transform: uppercase; opacity: 0.8; transition: var(--transition); }
+        .nav-links a:hover { opacity: 1; color: var(--purple-soft); }
+
+        /* SHOP HEADER */
+        .shop-intro { padding: 140px 0 40px 0; text-align: left; }
+        .shop-intro h1 { font-size: 48px; font-weight: 700; letter-spacing: -1px; margin-bottom: 10px; }
+        .shop-intro p { color: var(--text-gray); font-size: 18px; }
+
+        /* FILTROS MINIMALISTAS */
+        .filter-bar {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 50px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+        }
+        .filter-btn {
+            padding: 10px 24px;
+            border-radius: 40px;
+            border: 1px solid #e5e5e5;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+            transition: var(--transition);
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--text-dark);
+            color: white;
+            border-color: var(--text-dark);
+        }
+
+        /* GRID DE PRODUTOS */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px 30px;
+            margin-bottom: 80px;
+        }
+
+        .product-card {
+            text-decoration: none;
+            color: inherit;
+            group: hover;
+        }
+
+        .product-image-wrapper {
+            background-color: var(--bege-light);
+            border-radius: 20px;
+            aspect-ratio: 1 / 1.2;
+            overflow: hidden;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .product-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .product-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .product-info h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .product-info .category {
+            font-size: 12px;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .product-info .price {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--purple-dark);
+        }
+
+        /* FOOTER */
+        footer { padding: 60px 0; border-top: 1px solid #eee; text-align: center; color: var(--text-gray); font-size: 14px; }
+
+        /* Responsividade */
+        @media (max-width: 900px) {
+            .product-grid { grid-template-columns: repeat(2, 1fr); }
+            .shop-intro h1 { font-size: 36px; }
+        }
+        @media (max-width: 600px) {
+            .product-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="loja.html" style="color: var(--purple-soft);">Loja</a>
+                </div>
+                <div class="logo">
+                    <img src="assets/img/Osh_logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/150x50/1d1d1f/ffffff?text=OS_H+WHITE'">
+                </div>
+                <div class="nav-links">
+                    <a href="#">Personalizar</a>
+                    <a href="#">Carrinho (0)</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Intro da Loja -->
+        <section class="shop-intro">
+            <h1>Coleção Completa</h1>
+            <p>Ferramentas desenhadas para dar ordem ao teu caos criativo.</p>
+        </section>
+
+        <!-- Filtros -->
+        <div class="filter-bar">
+            <button class="filter-btn active">Todos</button>
+            <button class="filter-btn">Cadernos</button>
+            <button class="filter-btn">Planners</button>
+            <button class="filter-btn">Arte & Desenho</button>
+            <button class="filter-btn">Personalizados</button>
+            <button class="filter-btn">Acessórios</button>
+        </div>
+
+        <!-- Grid de Produtos -->
+        <div class="product-grid">
+            
+            <!-- Produto 1 -->
+            <a href="produto.html" class="product-card">
+                <div class="product-image-wrapper">
+                    <span class="badge">Novo</span>
+                    <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=600" alt="Caderno">
+                </div>
+                <div class="product-info">
+                    <span class="category">Cadernos</span>
+                    <h3>Caderno Mente Fluída A5</h3>
+                    <p class="price">24,90€</p>
+                </div>
+            </a>
+
+            <!-- Produto 2 -->
+            <a href="#" class="product-card">
+                <div class="product-image-wrapper">
+                    <span class="badge">Destaque</span>
+                    <img src="https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?auto=format&fit=crop&q=80&w=600" alt="Planner">
+                </div>
+                <div class="product-info">
+                    <span class="category">Planners</span>
+                    <h3>Planeador Mensal Consciente</h3>
+                    <p class="price">32,00€</p>
+                </div>
+            </a>
+
+            <!-- Produto 3 -->
+            <a href="#" class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=600" alt="Arte">
+                </div>
+                <div class="product-info">
+                    <span class="category">Arte</span>
+                    <h3>Sketchbook Papel Grão Fino</h3>
+                    <p class="price">19,50€</p>
+                </div>
+            </a>
+
+            <!-- Produto 4 -->
+            <a href="#" class="product-card">
+                <div class="product-image-wrapper">
+                    <span class="badge" style="background: var(--purple-soft);">Artesanal</span>
+                    <img src="https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&q=80&w=600" alt="Caderno">
+                </div>
+                <div class="product-info">
+                    <span class="category">Personalizado</span>
+                    <h3>Caderno com Monograma</h3>
+                    <p class="price">29,90€</p>
+                </div>
+            </a>
+
+            <!-- Produto 5 -->
+            <a href="#" class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&q=80&w=600" alt="Caneta">
+                </div>
+                <div class="product-info">
+                    <span class="category">Acessórios</span>
+                    <h3>Caneta de Metal Inquieto</h3>
+                    <p class="price">12,00€</p>
+                </div>
+            </a>
+
+            <!-- Produto 6 -->
+            <a href="#" class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1519337265831-281ec6cc8514?auto=format&fit=crop&q=80&w=600" alt="Stickers">
+                </div>
+                <div class="product-info">
+                    <span class="category">Acessórios</span>
+                    <h3>Pack de Stickers Organizadores</h3>
+                    <p class="price">8,50€</p>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Papelaria para Mentes Inquietas. Ferramentas para o teu amanhã.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
