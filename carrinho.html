@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho | Mentes Inquietas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --white: #ffffff;
+            --bege-light: #F9F7F2;
+            --purple-soft: #D1C4E9;
+            --purple-dark: #9575CD;
+            --header-bg: #1d1d1f;
+            --text-dark: #1d1d1f;
+            --text-gray: #86868b;
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--text-dark); }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        /* HEADER */
+        header { padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 1000; background: var(--header-bg); }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo img { height: 35px; }
+        .nav-links a { text-decoration: none; color: white; margin: 0 15px; font-size: 13px; text-transform: uppercase; font-weight: 500; opacity: 0.8; }
+        .nav-links a:hover { opacity: 1; color: var(--purple-soft); }
+
+        /* CART CONTENT */
+        .cart-wrapper { display: grid; grid-template-columns: 1fr 380px; gap: 60px; padding: 140px 0 80px; }
+
+        h1 { font-size: 32px; margin-bottom: 40px; letter-spacing: -1px; }
+
+        /* ITEMS LIST */
+        .cart-item {
+            display: grid;
+            grid-template-columns: 120px 1fr auto;
+            gap: 25px;
+            padding: 25px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .item-img { width: 120px; height: 150px; background: var(--bege-light); border-radius: 15px; object-fit: cover; }
+
+        .item-details h3 { font-size: 18px; margin-bottom: 8px; }
+        .item-meta { font-size: 13px; color: var(--text-gray); line-height: 1.6; }
+        .item-meta strong { color: var(--purple-dark); }
+
+        .item-price { font-weight: 600; font-size: 18px; text-align: right; }
+        .remove-btn { 
+            background: none; border: none; color: var(--text-gray); cursor: pointer; 
+            font-size: 12px; text-decoration: underline; margin-top: 10px; display: block;
+        }
+
+        /* RESUMO (DIREITA) */
+        .summary-box {
+            background: var(--bege-light);
+            padding: 35px;
+            border-radius: 30px;
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+
+        .summary-box h2 { font-size: 20px; margin-bottom: 25px; }
+        .summary-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 15px; }
+        .summary-total { border-top: 1px solid #ddd; margin-top: 20px; padding-top: 20px; font-weight: 700; font-size: 22px; }
+
+        .checkout-btn {
+            width: 100%; padding: 20px; background: var(--text-dark); color: white;
+            border: none; border-radius: 40px; font-weight: 700; font-size: 16px;
+            cursor: pointer; transition: var(--transition); margin-top: 30px;
+        }
+        .checkout-btn:hover { background: var(--purple-dark); transform: translateY(-3px); }
+
+        /* CROSS SELLING */
+        .upsell { margin-top: 60px; }
+        .upsell h4 { margin-bottom: 20px; font-size: 14px; text-transform: uppercase; color: var(--text-gray); }
+        .upsell-grid { display: flex; gap: 20px; }
+        .upsell-card { 
+            background: white; border: 1px solid #eee; padding: 15px; border-radius: 20px; 
+            width: 180px; text-align: center; transition: var(--transition);
+        }
+        .upsell-card:hover { border-color: var(--purple-soft); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .upsell-card img { width: 80px; height: 80px; margin-bottom: 10px; }
+        .upsell-card p { font-size: 13px; font-weight: 600; margin-bottom: 5px; }
+        .upsell-card span { font-size: 12px; color: var(--purple-dark); }
+
+        @media (max-width: 900px) {
+            .cart-wrapper { grid-template-columns: 1fr; }
+            .summary-box { position: static; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="loja.html">Loja</a>
+                </div>
+                <div class="logo">
+                    <img src="assets/img/Osh_logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/150x50/1d1d1f/ffffff?text=OS_H'">
+                </div>
+                <div class="nav-links">
+                    <a href="personalizar.html">Personalizar</a>
+                    <a href="carrinho.html" style="color: var(--purple-soft);">Carrinho (1)</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="cart-wrapper">
+            
+            <!-- Lista de Itens -->
+            <section class="cart-items">
+                <h1>O teu Carrinho</h1>
+
+                <!-- Item 1: O Caderno Personalizado -->
+                <div class="cart-item">
+                    <img src="https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&q=80&w=400" alt="Caderno" class="item-img">
+                    <div class="item-details">
+                        <h3>Caderno Mente Inquieta (Personalizado)</h3>
+                        <p class="item-meta">
+                            Cor: <strong>Roxo Suave</strong><br>
+                            Miolo: <strong>Liso Creative 120g</strong><br>
+                            Páginas: <strong>160 folhas</strong><br>
+                            Gravação: <strong>"Ideias de um dia chuvoso"</strong>
+                        </p>
+                        <button class="remove-btn">Remover</button>
+                    </div>
+                    <div class="item-price">33,90€</div>
+                </div>
+
+                <!-- Cross Selling Section -->
+                <div class="upsell">
+                    <h4>Completa o teu Ritual</h4>
+                    <div class="upsell-grid">
+                        <div class="upsell-card">
+                            <img src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&q=80&w=200" alt="Caneta">
+                            <p>Caneta Minimal</p>
+                            <span>+ 12,00€</span>
+                        </div>
+                        <div class="upsell-card">
+                            <img src="https://images.unsplash.com/photo-1603484477859-abe6a73f9366?auto=format&fit=crop&q=80&w=200" alt="Stickers">
+                            <p>Pack Stickers</p>
+                            <span>+ 8,50€</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resumo da Encomenda -->
+            <aside class="summary-box">
+                <h2>Resumo</h2>
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span>33,90€</span>
+                </div>
+                <div class="summary-row">
+                    <span>Portes de Envio</span>
+                    <span style="color: #27ae60;">Grátis</span>
+                </div>
+                <div class="summary-row">
+                    <span>IVA (23%)</span>
+                    <span>6,34€</span>
+                </div>
+                
+                <div class="summary-row summary-total">
+                    <span>Total</span>
+                    <span>33,90€</span>
+                </div>
+
+                <button class="checkout-btn">Finalizar Encomenda</button>
+                
+                <p style="font-size: 11px; text-align: center; color: var(--text-gray); margin-top: 20px;">
+                    Pagamento seguro via Stripe ou MBWay.
+                </p>
+            </aside>
+
+        </div>
+    </main>
+
+    <footer style="padding: 60px 0; text-align: center; color: var(--text-gray); font-size: 13px; border-top: 1px solid #eee;">
+        <p>&copy; 2024 Papelaria para Mentes Inquietas. Feito à mão com propósito.</p>
+    </footer>
+
+</body>
+</html>
