@@ -3,25 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mentes Inquietas | Personalizar</title>
+    <title>Personalizar | Mentes Inquietas</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        :root { --white: #ffffff; --bege-light: #F9F7F2; --purple-soft: #D1C4E9; --header-bg: #1d1d1f; --text-dark: #1d1d1f; }
+        :root {
+            --white: #ffffff;
+            --bege-light: #F9F7F2;
+            --purple-soft: #D1C4E9;
+            --purple-dark: #9575CD;
+            --header-bg: #1d1d1f;
+            --text-dark: #1d1d1f;
+            --text-gray: #86868b;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: var(--white); }
+        body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--text-dark); overflow-x: hidden; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* HEADER */
         header { padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 1000; background: var(--header-bg); }
         nav { display: flex; justify-content: space-between; align-items: center; }
-        .nav-links a { text-decoration: none; color: white; margin: 0 15px; font-size: 13px; text-transform: uppercase; }
         .logo img { height: 35px; }
-        .configurator { display: grid; grid-template-columns: 1fr 400px; padding-top: 70px; min-height: 100vh; }
-        .preview { background: var(--bege-light); display: flex; justify-content: center; align-items: center; }
-        .notebook { width: 300px; height: 400px; background: var(--purple-soft); border-radius: 0 20px 20px 0; box-shadow: 20px 20px 40px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center; }
-        .controls { padding: 60px 40px; }
-        input { width: 100%; padding: 15px; margin: 20px 0; border: 1px solid #ddd; border-radius: 10px; }
+        .nav-links a { text-decoration: none; color: white; margin: 0 15px; font-size: 13px; text-transform: uppercase; font-weight: 500; opacity: 0.8; }
+        .nav-links a:hover { opacity: 1; color: var(--purple-soft); }
+
+        /* LAYOUT */
+        .config-wrapper { display: grid; grid-template-columns: 1fr 450px; min-height: 100vh; padding-top: 70px; }
+
+        /* PREVIEW (ESQUERDA) */
+        .preview-section { background-color: var(--bege-light); display: flex; justify-content: center; align-items: center; position: sticky; top: 70px; height: calc(100vh - 70px); }
+        .notebook-mockup { 
+            width: 320px; height: 440px; background-color: var(--purple-soft); 
+            border-radius: 5px 25px 25px 5px; box-shadow: 25px 25px 50px rgba(0,0,0,0.1);
+            display: flex; justify-content: center; align-items: center; padding: 40px; position: relative; transition: var(--transition);
+        }
+        .custom-text-preview { color: white; font-size: 22px; font-weight: 300; text-align: center; font-style: italic; }
+
+        /* OPÇÕES (DIREITA) */
+        .options-section { padding: 60px 40px; background: white; border-left: 1px solid #eee; overflow-y: auto; }
+        .option-group { margin-bottom: 35px; }
+        .option-group h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-gray); margin-bottom: 15px; }
+
+        /* CORES */
+        .color-grid { display: flex; gap: 12px; }
+        .color-dot { width: 35px; height: 35px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: var(--transition); }
+        .color-dot.active { border-color: var(--text-dark); transform: scale(1.1); }
+
+        /* BOTÕES DE TIPO DE PAPEL */
+        .type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .type-btn { 
+            padding: 15px; border: 1px solid #eee; border-radius: 12px; background: white; 
+            cursor: pointer; font-size: 13px; font-weight: 500; transition: var(--transition); text-align: left;
+        }
+        .type-btn:hover { border-color: var(--purple-soft); }
+        .type-btn.active { background: var(--text-dark); color: white; border-color: var(--text-dark); }
+        .type-btn span { display: block; font-size: 11px; opacity: 0.7; font-weight: 400; }
+
+        /* INPUTS */
+        input[type="text"], select { 
+            width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #eee; 
+            font-family: inherit; font-size: 15px; outline: none; background: white;
+        }
+
+        /* PREÇO FINAL */
+        .price-panel { border-top: 2px solid var(--bege-light); padding-top: 25px; margin-top: 40px; }
+        .price-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .total-price { font-size: 32px; font-weight: 700; color: var(--text-dark); }
+        
+        .buy-btn { 
+            width: 100%; padding: 20px; background: var(--text-dark); color: white; 
+            border: none; border-radius: 40px; font-weight: 700; cursor: pointer; transition: var(--transition);
+        }
+        .buy-btn:hover { background: var(--purple-dark); transform: translateY(-3px); }
+
+        @media (max-width: 900px) {
+            .config-wrapper { grid-template-columns: 1fr; }
+            .preview-section { height: 350px; position: relative; top: 0; }
+        }
     </style>
 </head>
 <body>
+
     <header>
         <div class="container">
             <nav>
@@ -29,7 +93,9 @@
                     <a href="index.html">Home</a>
                     <a href="loja.html">Loja</a>
                 </div>
-                <div class="logo"><img src="assets/img/Osh_logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/150x50/1d1d1f/ffffff?text=OS_H'"></div>
+                <div class="logo">
+                    <img src="assets/img/Osh_logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/150x50/1d1d1f/ffffff?text=OS_H'">
+                </div>
                 <div class="nav-links">
                     <a href="personalizar.html" style="color: var(--purple-soft);">Personalizar</a>
                     <a href="#">Carrinho (0)</a>
@@ -37,16 +103,117 @@
             </nav>
         </div>
     </header>
-    <div class="configurator">
-        <div class="preview">
-            <div class="notebook" id="nb">A tua frase</div>
-        </div>
-        <div class="controls">
-            <h1>Personaliza</h1>
-            <p>Escreve a tua frase na capa:</p>
-            <input type="text" placeholder="Escreve aqui..." onkeyup="document.getElementById('nb').innerText = this.value">
-            <button style="background: black; color: white; width: 100%; padding: 20px; border-radius: 40px; border: none; font-weight: 700; cursor: pointer;">Finalizar Compra</button>
-        </div>
-    </div>
+
+    <main class="config-wrapper">
+        <!-- Lado Visual -->
+        <section class="preview-section">
+            <div class="notebook-mockup" id="notebook-preview">
+                <div class="custom-text-preview" id="text-display">A tua frase</div>
+            </div>
+        </section>
+
+        <!-- Lado de Controle -->
+        <section class="options-section">
+            <h1 style="margin-bottom: 30px; font-size: 28px;">Configura o teu Caderno</h1>
+
+            <!-- COR -->
+            <div class="option-group">
+                <h2>1. Cor da Capa</h2>
+                <div class="color-grid">
+                    <div class="color-dot active" style="background: #D1C4E9;" onclick="updateColor('#D1C4E9', this)"></div>
+                    <div class="color-dot" style="background: #F9F7F2; border: 1px solid #ddd;" onclick="updateColor('#F9F7F2', this)"></div>
+                    <div class="color-dot" style="background: #1d1d1f;" onclick="updateColor('#1d1d1f', this)"></div>
+                    <div class="color-dot" style="background: #b5835a;" onclick="updateColor('#b5835a', this)"></div>
+                </div>
+            </div>
+
+            <!-- QUALIDADE DO PAPEL (AQUI ADICIONA VALOR) -->
+            <div class="option-group">
+                <h2>2. Qualidade do Papel</h2>
+                <div class="type-grid">
+                    <button class="type-btn active" onclick="setPaper('Standard', 0, this)">
+                        Pontilhado 90g
+                        <span>Incluído</span>
+                    </button>
+                    <button class="type-btn" onclick="setPaper('Premium', 3.5, this)">
+                        Liso Creative 120g
+                        <span>+ 3,50€</span>
+                    </button>
+                    <button class="type-btn" onclick="setPaper('Pautado', 0, this)">
+                        Pautado 90g
+                        <span>Incluído</span>
+                    </button>
+                    <button class="type-btn" onclick="setPaper('Quadriculado', 2.0, this)">
+                        Quadriculado 90g
+                        <span>+ 2,00€</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- QUANTIDADE DE FOLHAS (AQUI ADICIONA VALOR) -->
+            <div class="option-group">
+                <h2>3. Quantidade de Páginas</h2>
+                <select id="page-select" onchange="updatePrice()">
+                    <option value="0">120 Páginas (Incluído)</option>
+                    <option value="5.5">160 Páginas (+ 5,50€)</option>
+                    <option value="9.0">200 Páginas (+ 9,00€)</option>
+                </select>
+            </div>
+
+            <!-- TEXTO PERSONALIZADO -->
+            <div class="option-group">
+                <h2>4. Frase na Capa</h2>
+                <input type="text" id="text-input" maxlength="20" placeholder="Escreve aqui..." onkeyup="document.getElementById('text-display').innerText = this.value || 'A tua frase'">
+            </div>
+
+            <!-- PAINEL DE PREÇO DINÂMICO -->
+            <div class="price-panel">
+                <div class="price-row">
+                    <span>Preço Total</span>
+                    <span class="total-price" id="final-price">24,90€</span>
+                </div>
+                <button class="buy-btn">Adicionar ao Carrinho</button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Lógica de Preços
+        let basePrice = 24.90;
+        let paperExtra = 0;
+        let pagesExtra = 0;
+
+        function updatePrice() {
+            // Obter valor do select de páginas
+            pagesExtra = parseFloat(document.getElementById('page-select').value);
+            
+            // Calcular total
+            let total = basePrice + paperExtra + pagesExtra;
+            
+            // Atualizar o ecrã
+            document.getElementById('final-price').innerText = total.toFixed(2).replace('.', ',') + "€";
+        }
+
+        function setPaper(name, price, element) {
+            paperExtra = price;
+            
+            // Atualizar visual dos botões
+            document.querySelectorAll('.type-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+            
+            updatePrice();
+        }
+
+        function updateColor(color, element) {
+            const nb = document.getElementById('notebook-preview');
+            const txt = document.getElementById('text-display');
+            
+            nb.style.backgroundColor = color;
+            txt.style.color = (color === '#F9F7F2') ? '#1d1d1f' : 'white';
+
+            document.querySelectorAll('.color-dot').forEach(dot => dot.classList.remove('active'));
+            element.classList.add('active');
+        }
+    </script>
 </body>
 </html>
