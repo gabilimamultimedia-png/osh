@@ -1,46 +1,298 @@
-<!-- Main Home Container -->
-<section class="home-wrapper">
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papelaria para Mentes Inquietas | Premium Stationery</title>
+    <!-- Fonte Moderna similar a Open Sauce -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Hero Component -->
-    <header class="hero-v2">
-        <div class="hero-video-bg">
-            <video autoplay muted loop src="assets/vid/hero_brand.mp4"></video>
-        </div>
-        <div class="hero-content container">
-            <h1 class="fade-in">Onde a tua criatividade ganha forma.</h1>
-            <div class="cta-group">
-                <a href="/loja" class="btn-primary">Ver Produtos</a>
-                <a href="/custom" class="btn-outline">Cria o Teu →</a>
-            </div>
+    <style>
+        /* CSS RESET & VARIAVEIS */
+        :root {
+            --white: #ffffff;
+            --bege-light: #F9F7F2;
+            --purple-soft: #D1C4E9;
+            --purple-dark: #9575CD;
+            --text-dark: #1d1d1f;
+            --text-gray: #86868b;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px; /* Ajusta conforme o teu logo */
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            margin: 0 15px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--purple-dark);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 160px 0 80px 0;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bege-light) 0%, var(--white) 100%);
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 700;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s forwards;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+        }
+
+        .btn-primary {
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            background-color: var(--purple-dark);
+        }
+
+        /* BENTO GRID CATEGORIES */
+        .categories {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            margin-bottom: 40px;
+            font-size: 32px;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(2, 300px);
+            gap: 20px;
+        }
+
+        .bento-item {
+            background: var(--bege-light);
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .bento-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+
+        .bento-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+            transition: var(--transition);
+        }
+
+        .bento-item:hover img {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .bento-content {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            z-index: 2;
+        }
+
+        .bento-content span {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-gray);
+            font-weight: 700;
+        }
+
+        .bento-content h3 {
+            font-size: 24px;
+            color: var(--text-dark);
+        }
+
+        /* Lógica de tamanhos da Grid */
+        .item-1 { grid-column: span 8; }
+        .item-2 { grid-column: span 4; }
+        .item-3 { grid-column: span 4; }
+        .item-4 { grid-column: span 8; }
+
+        /* STORYTELLING SECTION */
+        .story {
+            background-color: var(--purple-soft);
+            padding: 100px 0;
+            text-align: center;
+            border-radius: 40px;
+            margin: 40px 20px;
+        }
+
+        .story h2 {
+            font-size: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--white);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 40px; }
+            .bento-item { grid-column: span 12 !important; }
+            .bento-grid { display: flex; flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="nav-links">
+                    <a href="#">Loja</a>
+                    <a href="#">Personalizar</a>
+                </div>
+                <div class="logo">
+                    <!-- Coloquei um placeholder para o seu logo -->
+                    <img src="assets/img/Osh_logo.png" alt="Mentes Inquietas" onerror="this.src='https://via.placeholder.com/150x50?text=LOGO+OS_H'">
+                </div>
+                <div class="nav-links">
+                    <a href="#">Inspirar</a>
+                    <a href="#">Carrinho (0)</a>
+                </div>
+            </nav>
         </div>
     </header>
 
-    <!-- Bento Grid Category Component -->
-    <section class="bento-categories container py-lg">
-        <div class="bento-grid">
-            <div class="bento-item main-collection">
-                <img src="assets/img/cat-cadernos.jpg" alt="Cadernos">
-                <div class="item-info">
-                    <span>Essenciais</span>
-                    <h3>Cadernos Criativos</h3>
+    <main>
+        <!-- HERO -->
+        <section class="hero">
+            <div class="container">
+                <h1>Onde a tua criatividade<br>ganha forma.</h1>
+                <p>Produtos artesanais e funcionais desenhados para ajudar mentes inquietas a organizar o amanhã.</p>
+                <a href="#" class="btn-primary">Explorar Coleção</a>
+            </div>
+        </section>
+
+        <!-- CATEGORIAS BENTO GRID -->
+        <section class="container categories">
+            <h2 class="section-title">Coleções</h2>
+            <div class="bento-grid">
+                <!-- Item 1 -->
+                <div class="bento-item item-1">
+                    <img src="https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&q=80&w=800" alt="Cadernos">
+                    <div class="bento-content">
+                        <span>Essenciais</span>
+                        <h3>Cadernos de Estudo</h3>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="bento-item item-2">
+                    <img src="https://images.unsplash.com/photo-1506784365847-bbad939e9335?auto=format&fit=crop&q=80&w=600" alt="Planners">
+                    <div class="bento-content">
+                        <span>Foco</span>
+                        <h3>Planners</h3>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="bento-item item-3">
+                    <img src="https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&q=80&w=600" alt="Arte">
+                    <div class="bento-content">
+                        <span>Criatividade</span>
+                        <h3>Papelaria de Arte</h3>
+                    </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="bento-item item-4">
+                    <img src="https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?auto=format&fit=crop&q=80&w=800" alt="Personalizado">
+                    <div class="bento-content">
+                        <span>Exclusivo</span>
+                        <h3>Cria o teu Caderno</h3>
+                    </div>
                 </div>
             </div>
-            <div class="bento-item side-collection">
-                <img src="assets/img/cat-planners.jpg" alt="Planners">
-                <div class="item-info">
-                    <h3>Planners</h3>
-                </div>
-            </div>
-            <!-- Outros itens seguindo a mesma lógica -->
-        </div>
-    </section>
+        </section>
 
-    <!-- Storytelling Section -->
-    <section class="brand-story bg-soft-beige">
-        <div class="container text-center">
-            <p class="text-display">Cada página é um convite para a tua próxima grande ideia.</p>
-            <img src="assets/img/Osh_logo.png" class="mini-logo-divider" alt="Logo">
-        </div>
-    </section>
+        <!-- STORYTELLING -->
+        <section class="story container">
+            <h2>"Cada página é um convite para a tua próxima grande ideia."</h2>
+        </section>
+    </main>
 
-</section>
+    <footer style="padding: 60px 0; text-align: center; color: var(--text-gray); font-size: 14px;">
+        <p>&copy; 2024 Papelaria para Mentes Inquietas. Feito à mão com propósito.</p>
+    </footer>
+
+</body>
+</html>
