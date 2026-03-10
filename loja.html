@@ -12,54 +12,28 @@
             --bege-light: #F9F7F2;
             --purple-soft: #D1C4E9;
             --purple-dark: #9575CD;
-            --header-bg: #1d1d1f;
+            --header-bg: #1d1d1f; /* Fundo escuro para logo branco */
             --text-dark: #1d1d1f;
             --text-gray: #86868b;
             --transition: all 0.3s ease;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--white); color: var(--text-dark); }
+        body { font-family: 'Inter', sans-serif; background-color: var(--white); color: var(--text-dark); line-height: 1.6; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* HEADER (Igual à Home para consistência) */
-        header { padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 1000; background: var(--header-bg); }
+        /* HEADER UNIFICADO */
+        header { padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 1000; background: var(--header-bg); border-bottom: 1px solid rgba(255,255,255,0.1); }
         nav { display: flex; justify-content: space-between; align-items: center; }
         .logo img { height: 35px; }
-        .nav-links a { text-decoration: none; color: var(--white); margin: 0 15px; font-size: 13px; font-weight: 500; text-transform: uppercase; opacity: 0.8; transition: var(--transition); }
+        .nav-links a { text-decoration: none; color: white; margin: 0 15px; font-size: 13px; font-weight: 500; text-transform: uppercase; opacity: 0.8; transition: var(--transition); }
         .nav-links a:hover { opacity: 1; color: var(--purple-soft); }
 
-        /* SHOP HEADER */
-        .shop-intro { padding: 140px 0 40px 0; text-align: left; }
-        .shop-intro h1 { font-size: 48px; font-weight: 700; letter-spacing: -1px; margin-bottom: 10px; }
-        .shop-intro p { color: var(--text-gray); font-size: 18px; }
+        /* SHOP CONTENT */
+        .shop-header { padding: 140px 0 60px 0; text-align: center; }
+        .shop-header h1 { font-size: 42px; font-weight: 700; letter-spacing: -1.5px; }
 
-        /* FILTROS MINIMALISTAS */
-        .filter-bar {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 50px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-            scrollbar-width: none;
-        }
-        .filter-btn {
-            padding: 10px 24px;
-            border-radius: 40px;
-            border: 1px solid #e5e5e5;
-            background: white;
-            cursor: pointer;
-            font-size: 14px;
-            white-space: nowrap;
-            transition: var(--transition);
-        }
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--text-dark);
-            color: white;
-            border-color: var(--text-dark);
-        }
-
-        /* GRID DE PRODUTOS */
+        /* GRID DE PRODUTOS CORRIGIDA */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -70,23 +44,24 @@
         .product-card {
             text-decoration: none;
             color: inherit;
-            group: hover;
+            transition: var(--transition);
         }
 
-        .product-image-wrapper {
+        .image-container {
+            width: 100%;
+            aspect-ratio: 1 / 1.1;
             background-color: var(--bege-light);
-            border-radius: 20px;
-            aspect-ratio: 1 / 1.2;
+            border-radius: 24px;
             overflow: hidden;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             position: relative;
         }
 
-        .product-image-wrapper img {
+        .image-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .product-card:hover img {
@@ -98,46 +73,39 @@
             top: 15px;
             left: 15px;
             background: white;
-            padding: 5px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
+            font-size: 10px;
+            font-weight: 800;
             text-transform: uppercase;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
-        .product-info h3 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .product-info .category {
+        .product-info span {
             font-size: 12px;
             color: var(--text-gray);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 8px;
-            display: block;
         }
 
-        .product-info .price {
+        .product-info h3 {
+            font-size: 18px;
+            margin: 5px 0;
+            font-weight: 600;
+        }
+
+        .price {
             font-size: 16px;
-            font-weight: 500;
             color: var(--purple-dark);
+            font-weight: 600;
         }
 
-        /* FOOTER */
-        footer { padding: 60px 0; border-top: 1px solid #eee; text-align: center; color: var(--text-gray); font-size: 14px; }
+        footer { padding: 80px 0; border-top: 1px solid #eee; text-align: center; color: var(--text-gray); font-size: 13px; }
 
         /* Responsividade */
-        @media (max-width: 900px) {
-            .product-grid { grid-template-columns: repeat(2, 1fr); }
-            .shop-intro h1 { font-size: 36px; }
-        }
-        @media (max-width: 600px) {
-            .product-grid { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 900px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .product-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -150,10 +118,10 @@
                     <a href="loja.html" style="color: var(--purple-soft);">Loja</a>
                 </div>
                 <div class="logo">
-                    <img src="assets/img/Osh_logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/150x50/1d1d1f/ffffff?text=OS_H+WHITE'">
+                    <img src="assets/img/Osh_logo.png" alt="Mentes Inquietas" onerror="this.src='https://via.placeholder.com/150x50/1d1d1f/ffffff?text=OS_H+LOGO'">
                 </div>
                 <div class="nav-links">
-                    <a href="#">Personalizar</a>
+                    <a href="personalizar.html">Personalizar</a>
                     <a href="#">Carrinho (0)</a>
                 </div>
             </nav>
@@ -161,97 +129,85 @@
     </header>
 
     <main class="container">
-        <!-- Intro da Loja -->
-        <section class="shop-intro">
-            <h1>Coleção Completa</h1>
-            <p>Ferramentas desenhadas para dar ordem ao teu caos criativo.</p>
+        <section class="shop-header">
+            <h1>Ferramentas Criativas</h1>
+            <p style="color: var(--text-gray);">Desenvolvidas para dar vida às tuas ideias.</p>
         </section>
 
-        <!-- Filtros -->
-        <div class="filter-bar">
-            <button class="filter-btn active">Todos</button>
-            <button class="filter-btn">Cadernos</button>
-            <button class="filter-btn">Planners</button>
-            <button class="filter-btn">Arte & Desenho</button>
-            <button class="filter-btn">Personalizados</button>
-            <button class="filter-btn">Acessórios</button>
-        </div>
-
-        <!-- Grid de Produtos -->
         <div class="product-grid">
             
-            <!-- Produto 1 -->
-            <a href="produto.html" class="product-card">
-                <div class="product-image-wrapper">
-                    <span class="badge">Novo</span>
-                    <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=600" alt="Caderno">
+            <!-- PRODUTO: CADERNO -->
+            <a href="#" class="product-card">
+                <div class="image-container">
+                    <span class="badge">Artesanal</span>
+                    <img src="https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&q=80&w=800" alt="Caderno Minimalista">
                 </div>
                 <div class="product-info">
-                    <span class="category">Cadernos</span>
+                    <span>Cadernos</span>
                     <h3>Caderno Mente Fluída A5</h3>
                     <p class="price">24,90€</p>
                 </div>
             </a>
 
-            <!-- Produto 2 -->
+            <!-- PRODUTO: PLANNER -->
             <a href="#" class="product-card">
-                <div class="product-image-wrapper">
-                    <span class="badge">Destaque</span>
-                    <img src="https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?auto=format&fit=crop&q=80&w=600" alt="Planner">
+                <div class="image-container">
+                    <span class="badge">Organização</span>
+                    <img src="https://images.unsplash.com/photo-1506784365847-bbad939e9335?auto=format&fit=crop&q=80&w=800" alt="Planner Diário">
                 </div>
                 <div class="product-info">
-                    <span class="category">Planners</span>
-                    <h3>Planeador Mensal Consciente</h3>
+                    <span>Planners</span>
+                    <h3>Planeador Consciente 2024</h3>
                     <p class="price">32,00€</p>
                 </div>
             </a>
 
-            <!-- Produto 3 -->
+            <!-- PRODUTO: CANETA/ACESSÓRIOS -->
             <a href="#" class="product-card">
-                <div class="product-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=600" alt="Arte">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&q=80&w=800" alt="Caneta de Metal">
                 </div>
                 <div class="product-info">
-                    <span class="category">Arte</span>
-                    <h3>Sketchbook Papel Grão Fino</h3>
-                    <p class="price">19,50€</p>
+                    <span>Acessórios</span>
+                    <h3>Caneta de Escrita Infinita</h3>
+                    <p class="price">14,50€</p>
                 </div>
             </a>
 
-            <!-- Produto 4 -->
+            <!-- PRODUTO: PAPELARIA DE ARTE (LÁPIS/PINCÉIS) -->
             <a href="#" class="product-card">
-                <div class="product-image-wrapper">
-                    <span class="badge" style="background: var(--purple-soft);">Artesanal</span>
-                    <img src="https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&q=80&w=600" alt="Caderno">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=800" alt="Material de Arte">
                 </div>
                 <div class="product-info">
-                    <span class="category">Personalizado</span>
-                    <h3>Caderno com Monograma</h3>
-                    <p class="price">29,90€</p>
+                    <span>Arte</span>
+                    <h3>Set de Lápis de Grafite Puro</h3>
+                    <p class="price">18,90€</p>
                 </div>
             </a>
 
-            <!-- Produto 5 -->
-            <a href="#" class="product-card">
-                <div class="product-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&q=80&w=600" alt="Caneta">
+            <!-- PRODUTO: PERSONALIZADO -->
+            <a href="personalizar.html" class="product-card">
+                <div class="image-container">
+                    <span class="badge" style="background: var(--purple-soft);">Cria o Teu</span>
+                    <img src="https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&q=80&w=800" alt="Caderno Personalizado">
                 </div>
                 <div class="product-info">
-                    <span class="category">Acessórios</span>
-                    <h3>Caneta de Metal Inquieto</h3>
-                    <p class="price">12,00€</p>
+                    <span>Exclusivo</span>
+                    <h3>Caderno Configurado por Ti</h3>
+                    <p class="price">Desde 29,90€</p>
                 </div>
             </a>
 
-            <!-- Produto 6 -->
+            <!-- PRODUTO: STICKERS/DETALHES -->
             <a href="#" class="product-card">
-                <div class="product-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1519337265831-281ec6cc8514?auto=format&fit=crop&q=80&w=600" alt="Stickers">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1603484477859-abe6a73f9366?auto=format&fit=crop&q=80&w=800" alt="Acessórios de papelaria">
                 </div>
                 <div class="product-info">
-                    <span class="category">Acessórios</span>
-                    <h3>Pack de Stickers Organizadores</h3>
-                    <p class="price">8,50€</p>
+                    <span>Acessórios</span>
+                    <h3>Pack Stickers Minimalistas</h3>
+                    <p class="price">7,50€</p>
                 </div>
             </a>
 
