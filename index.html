@@ -3,45 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mentes Inquietas | Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Mentes Inquietas | Onde as ideias ganham forma</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        :root { --white: #ffffff; --bege-light: #F9F7F2; --purple-soft: #D1C4E9; --header-bg: #1d1d1f; --text-dark: #1d1d1f; --transition: all 0.4s ease; }
+        :root {
+            --white: #ffffff;
+            --bege-light: #F9F7F2;
+            --purple-soft: #D1C4E9;
+            --purple-dark: #9575CD;
+            --header-bg: rgba(29, 29, 31, 0.85); /* Glassmorphism */
+            --text-dark: #1d1d1f;
+            --text-gray: #86868b;
+            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: var(--white); }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        header { padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 1000; background: var(--header-bg); }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--white); color: var(--text-dark); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        
+        /* ANIMAÇÃO DE REVELAÇÃO */
+        .reveal { opacity: 0; transform: translateY(30px); transition: var(--transition); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* HEADER PREMIUM */
+        header { 
+            padding: 12px 0; position: fixed; width: 100%; top: 0; z-index: 1000; 
+            background: var(--header-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
         nav { display: flex; justify-content: space-between; align-items: center; }
-        .nav-links a { text-decoration: none; color: white; margin: 0 15px; font-size: 13px; text-transform: uppercase; font-weight: 500; }
+        .logo img { height: 32px; transition: var(--transition); }
+        .logo img:hover { transform: scale(1.05); }
+        .nav-links a { 
+            text-decoration: none; color: rgba(255,255,255,0.8); margin: 0 18px; 
+            font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;
+            transition: var(--transition);
+        }
         .nav-links a:hover { color: var(--purple-soft); }
-        .logo img { height: 35px; }
-        .hero { padding: 180px 0 100px; text-align: center; background: var(--bege-light); }
-        .hero h1 { font-size: 56px; margin-bottom: 20px; letter-spacing: -2px; }
-        .btn { background: var(--text-dark); color: white; padding: 15px 30px; border-radius: 30px; text-decoration: none; font-weight: 600; display: inline-block; margin-top: 20px; }
+
+        /* HERO SECTION - APPLE STYLE */
+        .hero { 
+            height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center;
+            background: radial-gradient(circle at center, #ffffff 0%, #F9F7F2 100%);
+            padding-top: 60px;
+        }
+        .hero-content h1 { 
+            font-size: clamp(40px, 8vw, 84px); font-weight: 700; letter-spacing: -4px; 
+            line-height: 0.95; margin-bottom: 24px; color: var(--text-dark);
+        }
+        .hero-content p { font-size: 22px; color: var(--text-gray); max-width: 600px; margin: 0 auto 40px; }
+        .cta-group { display: flex; gap: 15px; justify-content: center; }
+        
+        .btn-main { 
+            padding: 18px 36px; border-radius: 40px; text-decoration: none; font-weight: 600; 
+            font-size: 16px; transition: var(--transition); 
+        }
+        .btn-black { background: var(--text-dark); color: white; }
+        .btn-black:hover { background: #000; transform: translateY(-4px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .btn-outline { border: 1px solid var(--text-dark); color: var(--text-dark); }
+        .btn-outline:hover { background: var(--bege-light); transform: translateY(-4px); }
+
+        /* BENTO GRID MODERNIZADA */
+        .grid-section { padding: 120px 0; }
+        .bento-grid { 
+            display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: 350px; gap: 24px; 
+        }
+        .bento-card { 
+            position: relative; border-radius: 32px; overflow: hidden; background: var(--bege-light); 
+            text-decoration: none; color: var(--text-dark); transition: var(--transition);
+        }
+        .bento-card:hover { transform: scale(0.98); }
+        .bento-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s ease; }
+        .bento-card:hover img { transform: scale(1.1); }
+        
+        .card-info { 
+            position: absolute; bottom: 30px; left: 30px; z-index: 2; 
+            background: rgba(255,255,255,0.7); backdrop-filter: blur(10px);
+            padding: 15px 25px; border-radius: 20px;
+        }
+        .card-info h3 { font-size: 20px; font-weight: 600; }
+
+        .item-lg { grid-column: span 8; }
+        .item-sm { grid-column: span 4; }
+
+        /* INTERACTIVE MOOD SECTION */
+        .mood-section { 
+            background: var(--text-dark); padding: 100px 0; color: white; border-radius: 60px; 
+            margin: 0 20px 100px; text-align: center;
+        }
+        .mood-section h2 { font-size: 42px; margin-bottom: 40px; letter-spacing: -1px; }
+        .mood-btns { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .mood-btn { 
+            padding: 15px 30px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.2);
+            background: transparent; color: white; cursor: pointer; transition: var(--transition); font-size: 16px;
+        }
+        .mood-btn:hover { background: var(--purple-soft); color: var(--text-dark); border-color: var(--purple-soft); }
+
+        /* FOOTER */
+        footer { padding: 80px 0; text-align: center; color: var(--text-gray); border-top: 1px solid #eee; }
+        
+        @media (max-width: 900px) {
+            .item-lg, .item-sm { grid-column: span 12; }
+            .hero-content h1 { font-size: 50px; }
+        }
     </style>
 </head>
 <body>
+
     <header>
         <div class="container">
             <nav>
                 <div class="nav-links">
-                    <a href="index.html" style="color: var(--purple-soft);">Home</a>
+                    <a href="index.html">Home</a>
                     <a href="loja.html">Loja</a>
                 </div>
-                <div class="logo"><img src="assets/img/Osh_logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/150x50/1d1d1f/ffffff?text=OS_H'"></div>
+                <div class="logo">
+                    <img src="assets/img/Osh_logo.png" alt="Mentes Inquietas" onerror="this.src='https://via.placeholder.com/150x50/1d1d1f/ffffff?text=OS_H'">
+                </div>
                 <div class="nav-links">
                     <a href="personalizar.html">Personalizar</a>
-                    <a href="#">Carrinho (0)</a>
+                    <a href="carrinho.html">Carrinho</a>
                 </div>
             </nav>
         </div>
     </header>
-    <section class="hero">
+
+    <main>
+        <!-- HERO -->
+        <section class="hero">
+            <div class="container hero-content">
+                <h1 class="reveal">Para as ideias que<br>não descansam.</h1>
+                <p class="reveal">Papelaria artesanal, funcional e esteticamente inspiradora para mentes inquietas.</p>
+                <div class="cta-group reveal">
+                    <a href="loja.html" class="btn-main btn-black">Explorar Universo</a>
+                    <a href="personalizar.html" class="btn-main btn-outline">Criar o meu Caderno</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- BENTO GRID CATEGORIAS -->
+        <section class="container grid-section">
+            <div class="bento-grid">
+                <a href="loja.html" class="bento-card item-lg reveal">
+                    <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=1200" alt="Cadernos">
+                    <div class="card-info"><h3>Cadernos de Estudo</h3></div>
+                </a>
+                <a href="loja.html" class="bento-card item-sm reveal">
+                    <img src="https://images.unsplash.com/photo-1506784365847-bbad939e9335?auto=format&fit=crop&q=80&w=600" alt="Planners">
+                    <div class="card-info"><h3>Planners</h3></div>
+                </a>
+                <a href="loja.html" class="bento-card item-sm reveal">
+                    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=600" alt="Arte">
+                    <div class="card-info"><h3>Papelaria de Arte</h3></div>
+                </a>
+                <a href="personalizar.html" class="bento-card item-lg reveal">
+                    <img src="https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&q=80&w=1200" alt="Custom">
+                    <div class="card-info"><h3>Personalização Artesanal</h3></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- MOOD SECTION INTERATIVA -->
+        <section class="mood-section reveal">
+            <div class="container">
+                <h2>Como te sentes hoje?</h2>
+                <div class="mood-btns">
+                    <button class="mood-btn" onclick="location.href='loja.html'">Criativo</button>
+                    <button class="mood-btn" onclick="location.href='loja.html'">Caótico</button>
+                    <button class="mood-btn" onclick="location.href='loja.html'">Focado</button>
+                    <button class="mood-btn" onclick="location.href='loja.html'">Inspirado</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
         <div class="container">
-            <h1>Onde a tua criatividade ganha forma.</h1>
-            <p>Papelaria artesanal para mentes inquietas.</p>
-            <a href="loja.html" class="btn">Explorar Loja</a>
+            <img src="assets/img/Osh_logo.png" alt="Logo" style="height: 30px; filter: invert(1); margin-bottom: 20px; opacity: 0.3;">
+            <p>&copy; 2024 Papelaria para Mentes Inquietas. Feito à mão com propósito.</p>
         </div>
-    </section>
+    </footer>
+
+    <script>
+        // Lógica de Scroll Reveal (Apple Style)
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Ativar logo ao carregar
+        window.onload = reveal;
+    </script>
+
 </body>
 </html>
