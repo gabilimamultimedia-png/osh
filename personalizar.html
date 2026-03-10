@@ -177,43 +177,58 @@
         </section>
     </main>
 
-    <script>
-        // Lógica de Preços
-        let basePrice = 24.90;
-        let paperExtra = 0;
-        let pagesExtra = 0;
+   <script>
+    let basePrice = 24.90;
+    let paperExtra = 0;
+    let pagesExtra = 0;
+    let selectedColor = '#D1C4E9';
+    let selectedPaper = 'Pontilhado 90g';
+    let selectedPages = '120 Páginas';
 
-        function updatePrice() {
-            // Obter valor do select de páginas
-            pagesExtra = parseFloat(document.getElementById('page-select').value);
-            
-            // Calcular total
-            let total = basePrice + paperExtra + pagesExtra;
-            
-            // Atualizar o ecrã
-            document.getElementById('final-price').innerText = total.toFixed(2).replace('.', ',') + "€";
-        }
+    function updatePrice() {
+        const pageSelect = document.getElementById('page-select');
+        pagesExtra = parseFloat(pageSelect.value);
+        selectedPages = pageSelect.options[pageSelect.selectedIndex].text.split(' (')[0];
+        
+        let total = basePrice + paperExtra + pagesExtra;
+        document.getElementById('final-price').innerText = total.toFixed(2).replace('.', ',') + "€";
+        return total.toFixed(2);
+    }
 
-        function setPaper(name, price, element) {
-            paperExtra = price;
-            
-            // Atualizar visual dos botões
-            document.querySelectorAll('.type-btn').forEach(btn => btn.classList.remove('active'));
-            element.classList.add('active');
-            
-            updatePrice();
-        }
+    function setPaper(name, price, element) {
+        paperExtra = price;
+        selectedPaper = name;
+        document.querySelectorAll('.type-btn').forEach(btn => btn.classList.remove('active'));
+        element.classList.add('active');
+        updatePrice();
+    }
 
-        function updateColor(color, element) {
-            const nb = document.getElementById('notebook-preview');
-            const txt = document.getElementById('text-display');
-            
-            nb.style.backgroundColor = color;
-            txt.style.color = (color === '#F9F7F2') ? '#1d1d1f' : 'white';
+    function updateColor(color, element) {
+        selectedColor = color;
+        const nb = document.getElementById('notebook-preview');
+        nb.style.backgroundColor = color;
+        document.querySelectorAll('.color-dot').forEach(dot => dot.classList.remove('active'));
+        element.classList.add('active');
+    }
 
-            document.querySelectorAll('.color-dot').forEach(dot => dot.classList.remove('active'));
-            element.classList.add('active');
-        }
-    </script>
+    // A FUNÇÃO MÁGICA: SALVAR NO CARRINHO
+    document.querySelector('.buy-btn').onclick = function() {
+        const cartItem = {
+            name: "Caderno Mente Inquieta (Personalizado)",
+            price: updatePrice(),
+            color: selectedColor,
+            paper: selectedPaper,
+            pages: selectedPages,
+            text: document.getElementById('text-input').value || "Sem frase",
+            image: "https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&q=80&w=400"
+        };
+
+        // Guarda na memória do browser
+        localStorage.setItem('cartProduct', JSON.stringify(cartItem));
+        
+        // Redireciona para a página do carrinho
+        window.location.href = 'carrinho.html';
+    };
+</script>
 </body>
 </html>
