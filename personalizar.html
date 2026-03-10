@@ -3,157 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personalizar | Papelaria para Mentes Inquietas</title>
+    <title>Mentes Inquietas | Personalizar</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
     <style>
-        :root {
-            --white: #ffffff;
-            --bege-light: #F9F7F2;
-            --purple-soft: #D1C4E9;
-            --purple-dark: #9575CD;
-            --header-bg: #1d1d1f;
-            --text-dark: #1d1d1f;
-            --text-gray: #86868b;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
+        :root { --white: #ffffff; --bege-light: #F9F7F2; --purple-soft: #D1C4E9; --header-bg: #1d1d1f; --text-dark: #1d1d1f; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--white); color: var(--text-dark); overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; background: var(--white); }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-        /* HEADER (Padrão com Contraste para Logo Branco) */
         header { padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 1000; background: var(--header-bg); }
         nav { display: flex; justify-content: space-between; align-items: center; }
+        .nav-links a { text-decoration: none; color: white; margin: 0 15px; font-size: 13px; text-transform: uppercase; }
         .logo img { height: 35px; }
-        .nav-links a { text-decoration: none; color: var(--white); margin: 0 15px; font-size: 13px; font-weight: 500; text-transform: uppercase; opacity: 0.8; transition: var(--transition); }
-        .nav-links a:hover { opacity: 1; color: var(--purple-soft); }
-
-        /* CONFIGURATOR LAYOUT */
-        .config-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 450px;
-            min-height: 100vh;
-            padding-top: 80px;
-        }
-
-        /* LADO ESQUERDO: PREVIEW */
-        .preview-section {
-            background-color: var(--bege-light);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: sticky;
-            top: 80px;
-            height: calc(100vh - 80px);
-        }
-
-        .notebook-mockup {
-            width: 350px;
-            height: 480px;
-            background-color: var(--purple-soft); /* Cor inicial */
-            border-radius: 10px 30px 30px 10px;
-            box-shadow: 20px 20px 60px rgba(0,0,0,0.1), inset 10px 0 15px rgba(0,0,0,0.05);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-            position: relative;
-            transition: var(--transition);
-        }
-
-        /* Lombada do caderno */
-        .notebook-mockup::before {
-            content: '';
-            position: absolute;
-            left: 15px;
-            top: 0;
-            width: 2px;
-            height: 100%;
-            background: rgba(0,0,0,0.1);
-        }
-
-        .custom-text-preview {
-            color: rgba(255,255,255,0.9);
-            font-size: 24px;
-            font-weight: 300;
-            text-align: center;
-            font-style: italic;
-            word-wrap: break-word;
-            max-width: 80%;
-        }
-
-        /* LADO DIREITO: OPÇÕES */
-        .options-section {
-            padding: 60px 40px;
-            overflow-y: auto;
-            background: white;
-            border-left: 1px solid #eee;
-        }
-
-        .option-group { margin-bottom: 40px; }
-        .option-group h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-gray); margin-bottom: 20px; }
-
-        /* Seletores de Cor */
-        .color-grid { display: flex; gap: 15px; }
-        .color-dot {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: var(--transition);
-        }
-        .color-dot:hover { transform: scale(1.1); }
-        .color-dot.active { border-color: var(--text-dark); }
-
-        /* Inputs e Botões */
-        .type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .type-btn {
-            padding: 15px;
-            border: 1px solid #eee;
-            border-radius: 12px;
-            background: white;
-            cursor: pointer;
-            font-size: 14px;
-            transition: var(--transition);
-        }
-        .type-btn.active { border-color: var(--purple-dark); background: var(--bege-light); }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid #eee;
-            font-family: inherit;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .add-to-cart-fixed {
-            margin-top: 40px;
-            width: 100%;
-            padding: 20px;
-            background: var(--text-dark);
-            color: white;
-            border: none;
-            border-radius: 40px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .add-to-cart-fixed:hover { background: var(--purple-dark); transform: translateY(-2px); }
-
-        /* Responsividade */
-        @media (max-width: 900px) {
-            .config-wrapper { grid-template-columns: 1fr; }
-            .preview-section { height: 400px; position: relative; top: 0; }
-            .notebook-mockup { width: 220px; height: 300px; }
-        }
+        .configurator { display: grid; grid-template-columns: 1fr 400px; padding-top: 70px; min-height: 100vh; }
+        .preview { background: var(--bege-light); display: flex; justify-content: center; align-items: center; }
+        .notebook { width: 300px; height: 400px; background: var(--purple-soft); border-radius: 0 20px 20px 0; box-shadow: 20px 20px 40px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+        .controls { padding: 60px 40px; }
+        input { width: 100%; padding: 15px; margin: 20px 0; border: 1px solid #ddd; border-radius: 10px; }
     </style>
 </head>
 <body>
-
     <header>
         <div class="container">
             <nav>
@@ -161,9 +29,7 @@
                     <a href="index.html">Home</a>
                     <a href="loja.html">Loja</a>
                 </div>
-                <div class="logo">
-                    <img src="assets/img/Osh_logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/150x50/1d1d1f/ffffff?text=OS_H+WHITE'">
-                </div>
+                <div class="logo"><img src="assets/img/Osh_logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/150x50/1d1d1f/ffffff?text=OS_H'"></div>
                 <div class="nav-links">
                     <a href="personalizar.html" style="color: var(--purple-soft);">Personalizar</a>
                     <a href="#">Carrinho (0)</a>
@@ -171,102 +37,16 @@
             </nav>
         </div>
     </header>
-
-    <main class="config-wrapper">
-        <!-- Lado do Preview -->
-        <section class="preview-section">
-            <div class="notebook-mockup" id="notebook-preview">
-                <div class="custom-text-preview" id="text-display">A tua frase aqui</div>
-            </div>
-        </section>
-
-        <!-- Lado das Opções -->
-        <section class="options-section">
-            <div class="option-group">
-                <h1 style="font-size: 28px; margin-bottom: 10px;">Cria o teu Caderno</h1>
-                <p style="color: var(--text-gray); margin-bottom: 30px;">Personaliza cada detalhe da tua ferramenta de inspiração.</p>
-            </div>
-
-            <!-- Passo 1: Cor -->
-            <div class="option-group">
-                <h2>1. Escolha a cor da capa</h2>
-                <div class="color-grid">
-                    <div class="color-dot active" style="background-color: #D1C4E9;" onclick="updateColor('#D1C4E9', this)"></div>
-                    <div class="color-dot" style="background-color: #F9F7F2; border: 1px solid #ddd;" onclick="updateColor('#F9F7F2', this)"></div>
-                    <div class="color-dot" style="background-color: #1d1d1f;" onclick="updateColor('#1d1d1f', this)"></div>
-                    <div class="color-dot" style="background-color: #b5835a;" onclick="updateColor('#b5835a', this)"></div>
-                </div>
-            </div>
-
-            <!-- Passo 2: Miolo -->
-            <div class="option-group">
-                <h2>2. Tipo de Páginas</h2>
-                <div class="type-grid">
-                    <button class="type-btn active">Pontilhado</button>
-                    <button class="type-btn">Liso (Creative)</button>
-                    <button class="type-btn">Pautado</button>
-                    <button class="type-btn">Quadriculado</button>
-                </div>
-            </div>
-
-            <!-- Passo 3: Texto -->
-            <div class="option-group">
-                <h2>3. Frase na Capa (Opcional)</h2>
-                <input type="text" id="phrase-input" placeholder="Escreve algo inspirador..." onkeyup="updateText()">
-                <p style="font-size: 11px; color: var(--text-gray); margin-top: 8px;">Máximo de 25 caracteres para manter a estética.</p>
-            </div>
-
-            <!-- Passo 4: Tamanho -->
-            <div class="option-group">
-                <h2>4. Número de Páginas</h2>
-                <select style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #eee; background: white;">
-                    <option>120 páginas (Leve)</option>
-                    <option>160 páginas (Standard)</option>
-                    <option>200 páginas (Mente Inquieta)</option>
-                </select>
-            </div>
-
-            <div class="price-display" style="border-top: 1px solid #eee; padding-top: 20px; margin-top: 40px;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-weight: 600;">Total Personalizado</span>
-                    <span style="font-size: 24px; font-weight: 700;">29,90€</span>
-                </div>
-                <button class="add-to-cart-fixed">Adicionar ao Carrinho</button>
-            </div>
-        </section>
-    </main>
-
-    <script>
-        // Função para atualizar a cor do preview
-        function updateColor(color, element) {
-            // Atualiza cor do caderno
-            document.getElementById('notebook-preview').style.backgroundColor = color;
-            
-            // Ajusta cor do texto para contraste
-            const textDisplay = document.getElementById('text-display');
-            if(color === '#F9F7F2') {
-                textDisplay.style.color = '#1d1d1f';
-            } else {
-                textDisplay.style.color = 'rgba(255,255,255,0.9)';
-            }
-
-            // Atualiza classe ativa nos círculos
-            document.querySelectorAll('.color-dot').forEach(dot => dot.classList.remove('active'));
-            element.classList.add('active');
-        }
-
-        // Função para atualizar o texto no preview
-        function updateText() {
-            const input = document.getElementById('phrase-input');
-            const display = document.getElementById('text-display');
-            
-            if(input.value.length > 0) {
-                display.innerText = input.value;
-            } else {
-                display.innerText = "A tua frase aqui";
-            }
-        }
-    </script>
-
+    <div class="configurator">
+        <div class="preview">
+            <div class="notebook" id="nb">A tua frase</div>
+        </div>
+        <div class="controls">
+            <h1>Personaliza</h1>
+            <p>Escreve a tua frase na capa:</p>
+            <input type="text" placeholder="Escreve aqui..." onkeyup="document.getElementById('nb').innerText = this.value">
+            <button style="background: black; color: white; width: 100%; padding: 20px; border-radius: 40px; border: none; font-weight: 700; cursor: pointer;">Finalizar Compra</button>
+        </div>
+    </div>
 </body>
 </html>
