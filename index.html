@@ -1,29 +1,44 @@
+<!-- Exemplo de Estrutura da Homepage -->
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mentes Inquietas | Papelaria Criativa</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Papelaria para Mentes Inquietas</title>
 </head>
-<body style="background-color: #F7F5F0; color: #2C2C2C; margin: 0; font-family: 'Inter', sans-serif;">
-
-    <!-- COMPONENTE: MENU -->
-    <header style="display: flex; justify-content: space-between; padding: 24px; background: #FFFFFF;">
-        <nav><a href="category.html">Loja</a> | <a href="personalizar.html">Personalizar</a></nav>
-        <div class="logo">
-            <a href="index.html"><img src="assets/img/logo.svg" alt="Mentes Inquietas" height="30"></a>
+<body>
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="/shop">Loja</a>
+            <a href="/personalizar">Personalizar</a>
         </div>
-        <div class="cart">Carrinho (0)</div>
-    </header>
+        <img src="assets/img/Osh_logo.png" alt="Logo Mentes Inquietas" class="logo">
+        <div class="nav-user">
+            <a href="/search">Busca</a>
+            <a href="/cart">Carrinho (0)</a>
+        </div>
+    </nav>
 
-    <!-- COMPONENTE: HERO SECTION COM ANIMAÇÃO (Conceito) -->
-    <section class="hero" style="height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
-        <h1 style="font-size: 3rem; margin-bottom: 20px;">Organiza o caos. Liberta a criatividade.</h1>
-        <p style="font-size: 1.2rem; margin-bottom: 40px;">Papelaria artesanal com integração digital.</p>
-        <!-- Placeholder para a imagem do Caderno que abre com o scroll -->
-        <img src="assets/img/caderno-hero-fechado.png" alt="Caderno Criativo" style="width: 300px; transition: transform 0.5s;">
-    </section>
+    <main>
+        <!-- Hero Section Interativa -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Organiza o teu caos criativo.</h1>
+                <button class="btn-primary">Descobrir Cadernos</button>
+            </div>
+            <div class="hero-visual">
+                <canvas id="notebook-3d-canvas"></canvas> <!-- Render 3D ou Animação Lottie -->
+            </div>
+        </section>
 
+        <!-- Grid de Produtos (Componente Reutilizável) -->
+        <section class="product-grid">
+            <article class="product-card">
+                <div class="badge">Artesanal</div>
+                <img src="caderno-roxo.jpg" alt="Caderno Criativo">
+                <h3>Caderno de Ideias Fluídas</h3>
+                <p>24,90€</p>
+            </article>
+        </section>
+    </main>
 </body>
 </html>
