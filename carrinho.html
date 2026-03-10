@@ -115,77 +115,55 @@
         </div>
     </header>
 
-    <main class="container">
-        <div class="cart-wrapper">
-            
-            <!-- Lista de Itens -->
-            <section class="cart-items">
-                <h1>O teu Carrinho</h1>
+  <main class="container">
+    <div class="cart-wrapper" id="cart-content">
+        <!-- O conteúdo será gerado pelo JavaScript abaixo -->
+        <h1>O teu carrinho está vazio.</h1>
+        <a href="loja.html" style="color: var(--purple-dark);">Voltar à loja</a>
+    </div>
+</main>
 
-                <!-- Item 1: O Caderno Personalizado -->
-                <div class="cart-item">
-                    <img src="https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&q=80&w=400" alt="Caderno" class="item-img">
-                    <div class="item-details">
-                        <h3>Caderno Mente Inquieta (Personalizado)</h3>
-                        <p class="item-meta">
-                            Cor: <strong>Roxo Suave</strong><br>
-                            Miolo: <strong>Liso Creative 120g</strong><br>
-                            Páginas: <strong>160 folhas</strong><br>
-                            Gravação: <strong>"Ideias de um dia chuvoso"</strong>
-                        </p>
-                        <button class="remove-btn">Remover</button>
-                    </div>
-                    <div class="item-price">33,90€</div>
-                </div>
+<script>
+    window.onload = function() {
+        const product = JSON.parse(localStorage.getItem('cartProduct'));
+        const container = document.getElementById('cart-content');
 
-                <!-- Cross Selling Section -->
-                <div class="upsell">
-                    <h4>Completa o teu Ritual</h4>
-                    <div class="upsell-grid">
-                        <div class="upsell-card">
-                            <img src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&q=80&w=200" alt="Caneta">
-                            <p>Caneta Minimal</p>
-                            <span>+ 12,00€</span>
+        if (product) {
+            container.innerHTML = `
+                <section class="cart-items">
+                    <h1>O teu Carrinho</h1>
+                    <div class="cart-item">
+                        <img src="${product.image}" class="item-img">
+                        <div class="item-details">
+                            <h3>${product.name}</h3>
+                            <p class="item-meta">
+                                Cor: <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:${product.color}"></span><br>
+                                Miolo: <strong>${product.paper}</strong><br>
+                                Páginas: <strong>${product.pages}</strong><br>
+                                Gravação: <strong>"${product.text}"</strong>
+                            </p>
+                            <button class="remove-btn" onclick="removeItem()">Remover</button>
                         </div>
-                        <div class="upsell-card">
-                            <img src="https://images.unsplash.com/photo-1603484477859-abe6a73f9366?auto=format&fit=crop&q=80&w=200" alt="Stickers">
-                            <p>Pack Stickers</p>
-                            <span>+ 8,50€</span>
-                        </div>
+                        <div class="item-price">${product.price}€</div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- Resumo da Encomenda -->
-            <aside class="summary-box">
-                <h2>Resumo</h2>
-                <div class="summary-row">
-                    <span>Subtotal</span>
-                    <span>33,90€</span>
-                </div>
-                <div class="summary-row">
-                    <span>Portes de Envio</span>
-                    <span style="color: #27ae60;">Grátis</span>
-                </div>
-                <div class="summary-row">
-                    <span>IVA (23%)</span>
-                    <span>6,34€</span>
-                </div>
-                
-                <div class="summary-row summary-total">
-                    <span>Total</span>
-                    <span>33,90€</span>
-                </div>
+                <aside class="summary-box">
+                    <h2>Resumo</h2>
+                    <div class="summary-row"><span>Subtotal</span><span>${product.price}€</span></div>
+                    <div class="summary-row"><span>Portes</span><span style="color:#27ae60;">Grátis</span></div>
+                    <div class="summary-row summary-total"><span>Total</span><span>${product.price}€</span></div>
+                    <button class="checkout-btn" onclick="alert('Pedido enviado com sucesso!')">Finalizar Encomenda</button>
+                </aside>
+            `;
+        }
+    };
 
-                <button class="checkout-btn">Finalizar Encomenda</button>
-                
-                <p style="font-size: 11px; text-align: center; color: var(--text-gray); margin-top: 20px;">
-                    Pagamento seguro via Stripe ou MBWay.
-                </p>
-            </aside>
-
-        </div>
-    </main>
+    function removeItem() {
+        localStorage.removeItem('cartProduct');
+        location.reload();
+    }
+</script>
 
     <footer style="padding: 60px 0; text-align: center; color: var(--text-gray); font-size: 13px; border-top: 1px solid #eee;">
         <p>&copy; 2024 Papelaria para Mentes Inquietas. Feito à mão com propósito.</p>
